@@ -2,13 +2,9 @@ const {Telegraf} = require('telegraf')
 const {v4:uuidV4} = require('uuid')
 require('dotenv').config()
 let factGenerator = require('./factGenerator')
-const oneLinerJoke = require('one-liner-joke')
+let {getJokes} = require('./jokesGenerator')
 
 
-const getJokes = () => {
-    const randomJoke = oneLinerJoke.getRandomJoke();
-    return randomJoke;
-}
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.start((ctx) => {
