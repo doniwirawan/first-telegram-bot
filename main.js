@@ -3,7 +3,7 @@ const {v4:uuidV4} = require('uuid')
 require('dotenv').config()
 let factGenerator = require('./factGenerator')
 let {getJokes} = require('./jokesGenerator')
-
+let {getRandomCatFacts} = require('./catFactsGenerator')
 
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
@@ -39,6 +39,16 @@ bot.command('joke', async(ctx) => {
     const jokes = getJokes();
     try{
         ctx.reply(jokes.body)
+    }catch(error){
+        console.log('error', error)
+        ctx.reply('error, please try again')
+    }
+})
+bot.command('cats', async(ctx) => {
+    const catFact = await getRandomCatFacts();
+    try{
+        ctx.reply(catFact)
+        console.log(catFact)
     }catch(error){
         console.log('error', error)
         ctx.reply('error, please try again')
